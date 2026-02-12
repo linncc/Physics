@@ -1391,204 +1391,61 @@ body.dark-theme .review-option.wrong .option-letter {
 
 @media (max-width: 768px) {
 
-    /* ===== 全局基础 ===== */
-    body {
+    html, body {
+        width: 100%;
         overflow-x: hidden;
     }
 
-    .top-nav {
-        padding: 10px 12px;
-    }
-
-    .path-display {
-        font-size: 13px;
-        gap: 5px;
-    }
-
-    .nav-btn {
-        padding: 6px 12px;
-        font-size: 12px;
-    }
-
-    /* ===== 首页 ===== */
-
-    .hero h1 {
-        font-size: 30px;
-    }
-
-    .hero p {
-        font-size: 16px;
-    }
-
-    .grade-selection {
-        flex-direction: column;
-        align-items: stretch;
-        padding: 0 15px;
-        gap: 18px;
-    }
-
-    .grade-card {
+    .home-page,
+    .chapter-page,
+    .game-container,
+    .finish,
+    .settings,
+    .review-container {
         width: 100%;
-        padding: 25px 20px;
-        border-radius: 16px;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
-    /* ===== 上下册 / 模式 / 章节 / 小节 ===== */
-
+    /* 选择页 */
     .options-grid {
         grid-template-columns: 1fr !important;
+        width: 100% !important;
         max-width: 100% !important;
-        padding: 0 15px;
+        padding: 0 !important;
         gap: 15px;
     }
 
     .option-btn {
-        width: 100%;
-        min-height: 90px;
-        padding: 20px 15px;
-        font-size: 16px;
-        border-radius: 14px;
+        width: 100% !important;
     }
 
-    .option-btn small {
-        font-size: 14px;
-        margin-top: 6px;
-    }
-
-    /* 不再强制两列 —— 真正全宽铺满 */
     #volumePage .options-grid,
     #modePage .options-grid {
         grid-template-columns: 1fr !important;
         max-width: 100% !important;
     }
 
-    /* ===== 答题页面重构 ===== */
-
+    /* 答题页 */
     .game-container {
         flex-direction: column !important;
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 12px;
         gap: 15px;
     }
 
-    /* 隐藏侧栏 */
     .timer-column,
     .badges-column {
         display: none !important;
     }
 
-    /* 主答题区全宽 */
     .game-column {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 18px 15px;
-        border-radius: 16px;
-    }
-
-    /* ===== 题目与选项优化 ===== */
-
-    #question {
-        font-size: 18px;
-        padding: 0;
-        line-height: 1.5;
-    }
-
-    .option {
-        padding: 14px 12px;
-        font-size: 15px;
-        border-radius: 12px;
-        min-height: 50px;
-    }
-
-    /* 统计栏纵向排列 */
-    .stats {
-        flex-direction: column;
-        gap: 8px;
-        text-align: center;
-        font-size: 14px;
-    }
-
-    /* 进度条更细 */
-    .progress {
-        height: 8px;
-    }
-
-    /* ===== 结算页面 ===== */
-
-    .finish {
-        width: 95%;
         padding: 20px 15px;
-        border-radius: 18px;
-    }
-
-    .finish-buttons {
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .finish-buttons button {
-        width: 100%;
-    }
-
-    /* ===== 设置页面 ===== */
-
-    .settings {
-        width: 95%;
-        padding: 20px;
-    }
-
-    .setting-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-    }
-
-    .setting-control {
-        width: 100%;
-        justify-content: space-between;
-    }
-
-    /* ===== 弹窗优化 ===== */
-
-    .custom-modal-content {
-        width: 92%;
-        padding: 20px;
-        border-radius: 16px;
-    }
-
-    .custom-modal-footer {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    .custom-modal-btn {
-        width: 100%;
-        font-size: 14px;
-    }
-
-    /* ===== 复习页面 ===== */
-
-    .review-container {
-        width: 95%;
-        padding: 18px 15px;
-    }
-
-    .review-header h2 {
-        font-size: 22px;
-    }
-
-    .review-question {
-        font-size: 16px;
-    }
-
-    .review-option {
-        padding: 10px;
-        font-size: 14px;
-        min-height: 45px;
     }
 
 }
+
 
 
 @media (max-width: 480px) {
@@ -2055,3 +1912,4 @@ body.dark-theme .review-option.wrong .option-letter {
 
 </body>
 </html>
+
