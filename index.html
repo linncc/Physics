@@ -1400,8 +1400,9 @@ body.dark-theme .review-option.wrong .option-letter {
         padding: 40px 20px;
     }
     .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 15px;
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+        padding: 0 15px;
     }
     #volumePage .options-grid,
     #modePage .options-grid {
@@ -1409,11 +1410,13 @@ body.dark-theme .review-option.wrong .option-letter {
         max-width: 400px;
     }
     .option-btn {
-        padding: 20px 15px;
-        font-size: 16px;
+        width: 100%;
     }
     .game-container {
-        width: 95%;
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 0 15px;
+        gap: 15px;
     }
     .game-column {
         width: 100%;
@@ -1479,6 +1482,16 @@ body.dark-theme .review-option.wrong .option-letter {
         padding: 8px 12px;
         font-size: 13px;
     }
+    .timer-column,
+    .badges-column {
+        display: none;
+    }
+    .game-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        position: relative !important;
+        top: auto !important;
+    }
 }
 
 #volumePage .selection-level,
@@ -1532,6 +1545,17 @@ body.dark-theme .review-option.wrong .option-letter {
         padding: 10px;
     }
 }
+
+@media (hover: none) and (pointer: coarse) {
+    .option:hover,
+    body.dark-theme .option:hover {
+        background: inherit !important;
+        box-shadow: none !important;
+        transform: none !important;
+        border-color: inherit !important;
+    }
+}
+
 </style>
 
 
@@ -1936,13 +1960,13 @@ body.dark-theme .review-option.wrong .option-letter {
     </div>
 
 <!-- 数据文件 -->
-<script src="data/grade8_1.min.js"></script>
-<script src="data/grade8_2.min.js"></script>
-<script src="data/grade9_1.min.js"></script>
-<script src="data/grade9_2.min.js"></script>
+<script src="data/grade8_1.js"></script>
+<script src="data/grade8_2.js"></script>
+<script src="data/grade9_1.js"></script>
+<script src="data/grade9_2.js"></script>
 
 <!-- 主逻辑 -->
-<script src="data/app.min.js"></script>
+<script src="app.js"></script>
 
 </body>
 </html>
