@@ -1343,6 +1343,18 @@ body.dark-theme .review-option.wrong .option-letter {
     padding: 5px 10px;
 }
 
+#volumePage .selection-level,
+#modePage .selection-level {
+    display: flex;
+    justify-content: center;
+}
+
+#volumePage .options-grid,
+#modePage .options-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    max-width: 500px;
+}
+
 @media (max-width: 1024px) {
     .game-container {
         flex-direction: column;
@@ -1378,133 +1390,206 @@ body.dark-theme .review-option.wrong .option-letter {
 
 
 @media (max-width: 768px) {
+
+    /* ===== 全局基础 ===== */
+    body {
+        overflow-x: hidden;
+    }
+
     .top-nav {
-        padding: 10px 15px;
+        padding: 10px 12px;
     }
+
     .path-display {
-        font-size: 14px;
+        font-size: 13px;
+        gap: 5px;
     }
+
     .nav-btn {
-        padding: 8px 15px;
+        padding: 6px 12px;
         font-size: 12px;
     }
+
+    /* ===== 首页 ===== */
+
     .hero h1 {
-        font-size: 36px;
+        font-size: 30px;
     }
+
+    .hero p {
+        font-size: 16px;
+    }
+
     .grade-selection {
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
+        padding: 0 15px;
+        gap: 18px;
     }
+
     .grade-card {
-        width: 90%;
-        padding: 40px 20px;
+        width: 100%;
+        padding: 25px 20px;
+        border-radius: 16px;
     }
+
+    /* ===== 上下册 / 模式 / 章节 / 小节 ===== */
+
     .options-grid {
         grid-template-columns: 1fr !important;
         max-width: 100% !important;
         padding: 0 15px;
+        gap: 15px;
     }
-    #volumePage .options-grid,
-    #modePage .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 400px;
-    }
+
     .option-btn {
         width: 100%;
+        min-height: 90px;
+        padding: 20px 15px;
+        font-size: 16px;
+        border-radius: 14px;
     }
+
+    .option-btn small {
+        font-size: 14px;
+        margin-top: 6px;
+    }
+
+    /* 不再强制两列 —— 真正全宽铺满 */
+    #volumePage .options-grid,
+    #modePage .options-grid {
+        grid-template-columns: 1fr !important;
+        max-width: 100% !important;
+    }
+
+    /* ===== 答题页面重构 ===== */
+
     .game-container {
         flex-direction: column !important;
         width: 100% !important;
-        padding: 0 15px;
+        max-width: 100% !important;
+        padding: 0 12px;
         gap: 15px;
     }
-    .game-column {
-        width: 100%;
-        padding: 20px;
-        margin-top: 20px;
+
+    /* 隐藏侧栏 */
+    .timer-column,
+    .badges-column {
+        display: none !important;
     }
+
+    /* 主答题区全宽 */
+    .game-column {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 18px 15px;
+        border-radius: 16px;
+    }
+
+    /* ===== 题目与选项优化 ===== */
+
+    #question {
+        font-size: 18px;
+        padding: 0;
+        line-height: 1.5;
+    }
+
+    .option {
+        padding: 14px 12px;
+        font-size: 15px;
+        border-radius: 12px;
+        min-height: 50px;
+    }
+
+    /* 统计栏纵向排列 */
     .stats {
         flex-direction: column;
-        gap: 12px;
+        gap: 8px;
         text-align: center;
         font-size: 14px;
     }
+
+    /* 进度条更细 */
+    .progress {
+        height: 8px;
+    }
+
+    /* ===== 结算页面 ===== */
+
+    .finish {
+        width: 95%;
+        padding: 20px 15px;
+        border-radius: 18px;
+    }
+
     .finish-buttons {
         flex-direction: column;
-        gap: 15px;
+        gap: 12px;
     }
+
+    .finish-buttons button {
+        width: 100%;
+    }
+
+    /* ===== 设置页面 ===== */
+
+    .settings {
+        width: 95%;
+        padding: 20px;
+    }
+
     .setting-item {
         flex-direction: column;
         align-items: flex-start;
-        gap: 10px;
+        gap: 8px;
     }
+
     .setting-control {
         width: 100%;
         justify-content: space-between;
     }
+
+    /* ===== 弹窗优化 ===== */
+
     .custom-modal-content {
+        width: 92%;
         padding: 20px;
-        width: 95%;
+        border-radius: 16px;
     }
-    .custom-modal-btn {
-        padding: 10px 20px;
-        min-width: 100px;
-        font-size: 14px;
-    }
+
     .custom-modal-footer {
         flex-direction: column;
         gap: 10px;
     }
+
+    .custom-modal-btn {
+        width: 100%;
+        font-size: 14px;
+    }
+
+    /* ===== 复习页面 ===== */
+
     .review-container {
-        padding: 15px;
-        margin: 10px auto;
+        width: 95%;
+        padding: 18px 15px;
     }
+
     .review-header h2 {
-        font-size: 24px;
+        font-size: 22px;
     }
+
     .review-question {
         font-size: 16px;
     }
+
     .review-option {
-        padding: 8px 10px;
-        min-height: 40px;
-    }
-    .option-letter {
-        width: 26px;
-        height: 26px;
-        font-size: 12px;
-        margin-right: 10px;
-    }
-    .option-text {
+        padding: 10px;
         font-size: 14px;
+        min-height: 45px;
     }
-    .review-nav-btn {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
-    .timer-column,
-    .badges-column {
-        display: none;
-    }
-    .game-column {
-        width: 100% !important;
-        max-width: 100% !important;
-        position: relative !important;
-        top: auto !important;
-    }
+
 }
 
-#volumePage .selection-level,
-#modePage .selection-level {
-    display: flex;
-    justify-content: center;
-}
-
-#volumePage .options-grid,
-#modePage .options-grid {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    max-width: 500px;
-}
 
 @media (max-width: 480px) {
     .options-grid {
