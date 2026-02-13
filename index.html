@@ -1372,22 +1372,30 @@ body.dark-theme .review-option.wrong .option-letter {
 }
 
 @media (hover: none) and (pointer: coarse) {
+
+    /* 禁用所有 hover 效果 */
     .option-btn:hover,
     .grade-card:hover,
     .option:hover,
-    .nav-btn:hover {
+    .nav-btn:hover,
+    .path-segment:hover {
         transform: none !important;
         box-shadow: none !important;
-        background: inherit !important;
+        background: unset !important;
+        border-color: unset !important;
+        color: unset !important;
     }
-    
+
+    /* 保留点击反馈（轻微 active 动效） */
+    .option-btn:active,
     .grade-card:active,
     .option:active,
     .nav-btn:active {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 5px 15px rgba(0,122,204,0.4) !important;
+        transform: scale(0.97) !important;
+        transition: transform 0.1s ease !important;
     }
 }
+
 
 
 @media (max-width: 768px) {
@@ -1947,4 +1955,5 @@ body.dark-theme .review-option.wrong .option-letter {
 
 </body>
 </html>
+
 
