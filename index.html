@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>物理竞技场 Pro</title>
 <style>
+/* ===== 全局样式 ===== */
 body {
     margin: 0;
     font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
@@ -1546,8 +1547,93 @@ body.dark-theme .review-option.wrong .option-letter {
     box-shadow: none !important;
 }
 
-</style>
+/* ========== 新增样式（答题卡片统一风格） ========== */
+.game-card {
+    max-width: 700px;
+    margin: 20px auto;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
 
+body.dark-theme .game-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 选项与错题回顾完全统一 */
+.option {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.95);
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    font-size: var(--option-font-size);
+    min-height: var(--option-height);
+    line-height: 1.4;
+}
+
+body.dark-theme .option {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.option .option-letter {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    font-weight: bold;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+body.dark-theme .option .option-letter {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.option .option-text {
+    flex: 1;
+}
+
+.option.correct {
+    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
+    border-color: rgba(0,168,107,0.5) !important;
+}
+
+.option.wrong {
+    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
+    border-color: rgba(255,51,51,0.5) !important;
+}
+
+/* 称号平铺布局（覆盖原 badges-list） */
+#badgesList {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    background: transparent !important;
+    padding: 5px 0 !important;
+    min-height: 50px;
+}
+
+.badge-item {
+    margin: 0 !important;
+    flex: 0 0 auto;
+}
+</style>
 
 </head>
 
@@ -1674,53 +1760,40 @@ body.dark-theme .review-option.wrong .option-letter {
         </div>
     </div>
     
+    <!-- ========== 答题页面（重构为卡片风格，与错题回顾统一） ========== -->
     <div id="gamePage" class="hidden">
-        <button class="nav-btn game-exit-btn" onclick="showExitConfirm()">🚪 退出</button>
-        <div class="game-container">
-            <div class="timer-column">
-                <h3>⏰ 倒计时</h3>
-                <div class="timer-container">
-                    <div class="timer-circle">
-                        <div class="timer-inner">
-                            <div id="timerText">30</div>
-                            <div id="timerLabel">秒</div>
-                        </div>
-                    </div>
-                </div>
-                <div style="text-align:center;font-size:14px;color:#666">
-                    每题限时 <span id="timeLimitDisplay">45</span> 秒
-                </div>
+        <div class="game-card">
+            <!-- 卡片头部：标题 + 退出按钮（保留 game-exit-btn 类） -->
+            <div class="game-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--danger-color); margin-bottom: 20px; padding-bottom: 10px;">
+                <h2 style="color: var(--danger-color); margin: 0; font-size: 24px;">⚡ 答题模式</h2>
+                <button class="nav-btn game-exit-btn" onclick="showExitConfirm()" style="background: linear-gradient(45deg, #ff6b6b, #ff5252);">🚪 退出</button>
             </div>
-            <div class="game-column">
-                <div class="stats">
-                    <div>
-                        <span style="color:var(--primary-color)">📊 分数:</span>
-                        <span id="score">0</span>
-                    </div>
-                    <div>
-                        <span style="color:var(--accent-color)">⚡ 连击:</span>
-                        <span id="combo">0</span>
-                        <span id="fire"></span>
-                    </div>
-                    <div>
-                        <span style="color:#ff9900">🎖️ 段位:</span>
-                        <span id="rank">青铜</span>
-                    </div>
-                </div>
-                <div class="progress">
-                    <div id="progressBar"></div>
-                </div>
-                <h3 id="question"></h3>
-                <div id="options"></div>
+            
+            <!-- 状态栏：分数 / 连击 / 段位 / 计时（保留原有 ID） -->
+            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; background: rgba(0,0,0,0.03); padding: 12px; border-radius: 12px;">
+                <div><span style="color:var(--primary-color); font-weight: 500;">📊 分数</span> <span id="score">0</span></div>
+                <div><span style="color:var(--accent-color); font-weight: 500;">⚡ 连击</span> <span id="combo">0</span><span id="fire"></span></div>
+                <div><span style="color:#ff9900; font-weight: 500;">🎖️ 段位</span> <span id="rank">青铜</span></div>
+                <div><span style="color:var(--danger-color); font-weight: 500;">⏰ 剩余</span> <span id="timerText">30</span>秒</div>
             </div>
-            <div class="badges-column">
-                <h3>🏅 已获得称号</h3>
-                <div class="badges-list" id="badgesList">
-                    <div style="text-align:center;padding:40px 20px;color:#999;font-size:14px;">
-                        暂无称号<br>
-                        <small>达成条件后称号将显示在这里</small>
-                    </div>
+            
+            <!-- 进度条（保留原有 ID） -->
+            <div class="progress" style="margin-bottom: 20px;">
+                <div id="progressBar"></div>
+            </div>
+            
+            <!-- 题目区域（保留原有 ID） -->
+            <div id="question" class="review-question" style="font-size: var(--question-font-size); margin-bottom: 20px; line-height: 1.5;"></div>
+            
+            <!-- 选项区域（保留原有 ID） -->
+            <div id="options" class="review-options" style="margin-bottom: 20px;"></div>
+            
+            <!-- 称号区域（平铺布局） -->
+            <div style="margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
+                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+                    <span style="color: var(--accent-color); font-weight: bold;">🏅 已获得称号</span>
                 </div>
+                <div id="badgesList" style="display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px;"></div>
             </div>
         </div>
     </div>
@@ -1905,7 +1978,6 @@ body.dark-theme .review-option.wrong .option-letter {
                             <option value="10px">较小</option>
                             <option value="30px">中等</option>
                             <option value="50px">较大</option>
-
                         </select>
                     </div>
                 </div>
@@ -1961,5 +2033,3 @@ body.dark-theme .review-option.wrong .option-letter {
 </body>
 
 </html>
-
-
