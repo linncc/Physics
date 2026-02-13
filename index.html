@@ -50,10 +50,13 @@ body.dark-theme .review {
 }
 
 body.dark-theme .option {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.1);
 }
-    
+
+
+
 body.dark-theme .stats {
     background: rgba(0,0,0,0.3);
     border: 1px solid rgba(255,255,255,0.1);
@@ -95,6 +98,14 @@ body.dark-theme .stats {
     color: #aaa;
 }
 
+.back-btn {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+}
+
+.back-btn:hover {
+    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4) !important;
+}
+
 .nav-buttons {
     display: flex;
     gap: 15px;
@@ -114,8 +125,6 @@ body.dark-theme .stats {
     display: flex;
     align-items: center;
     gap: 8px;
-    min-width: 70px;
-    justify-content: center;
 }
 
 .nav-btn:hover {
@@ -180,19 +189,11 @@ body.dark-theme .hero p {
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
 
-body.dark-theme .grade-card {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.1);
-}
 
 .grade-card:hover {
     background: rgba(255,255,255,0.95);
     box-shadow: 0 10px 30px rgba(0,122,204,0.18);
     border-color: var(--primary-color);
-}
-
-body.dark-theme .grade-card:hover {
-    background: rgba(255,255,255,0.15);
 }
 
 .grade-card:active {
@@ -214,10 +215,6 @@ body.dark-theme .grade-card:hover {
 .grade-card p {
     color: #666;
     font-size: 16px;
-}
-
-body.dark-theme .grade-card p {
-    color: #ccc;
 }
 
 .chapter-page {
@@ -528,32 +525,11 @@ body.dark-theme #timerLabel {
     min-height: var(--option-height);
     display: flex;
     align-items: center;
+    justify-content: flex-start;
     line-height: 1.4;
-    gap: 10px;
 }
 
-.option .option-letter {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 14px;
-    flex-shrink: 0;
-}
 
-.option .option-text {
-    flex: 1;
-    font-weight: normal;
-}
-
-body.dark-theme .option .option-letter {
-    background: rgba(255,255,255,0.2);
-    color: white;
-}
 
 .correct {
     background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
@@ -1233,7 +1209,6 @@ body.dark-theme .review-question {
     min-height: var(--option-height);
     color: #333;
     line-height: 1.4;
-    gap: 10px;
 }
 
 body.dark-theme .review-option {
@@ -1250,9 +1225,9 @@ body.dark-theme .review-option {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-right: 12px;
     font-weight: bold;
     font-size: 14px;
-    flex-shrink: 0;
 }
 
 .review-option .option-text {
@@ -1358,41 +1333,17 @@ body.dark-theme .review-option.wrong .option-letter {
     margin-bottom: 15px;
 }
 
-/* 移动端统计区（默认隐藏） */
-.mobile-stats {
-    display: none;
-    justify-content: space-around;
-    align-items: center;
-    background: rgba(0,0,0,0.05);
-    padding: 10px;
-    border-radius: 12px;
-    margin-bottom: 15px;
-    font-size: 16px;
+.option[style*="--option-height: 35px"],
+.option[style*="--option-height: 40px"] {
+    padding: 5px 10px;
 }
 
-body.dark-theme .mobile-stats {
-    background: rgba(255,255,255,0.08);
+.review-option[style*="--option-height: 35px"],
+.review-option[style*="--option-height: 40px"] {
+    padding: 5px 10px;
 }
 
-.mobile-stats-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 5px;
-}
-
-.mobile-stats-value {
-    font-weight: bold;
-    color: var(--primary-color);
-    font-size: 18px;
-}
-
-.mobile-fire {
-    color: #ff5722;
-    font-size: 20px;
-}
-
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .game-container {
         flex-direction: column;
         gap: 15px;
@@ -1400,48 +1351,146 @@ body.dark-theme .mobile-stats {
     .timer-column, .badges-column {
         position: static;
         width: 100%;
-        flex: auto;
     }
-    .timer-column {
-        order: 1;
+}
+
+.no-hover * {
+    pointer-events: none !important;
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .option-btn:hover,
+    .grade-card:hover,
+    .option:hover,
+    .nav-btn:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        background: inherit !important;
     }
-    .game-column {
-        order: 2;
+    
+    .grade-card:active,
+    .option:active,
+    .nav-btn:active {
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0,122,204,0.4) !important;
     }
-    .badges-column {
-        order: 3;
+}
+
+
+@media (max-width: 768px) {
+    .top-nav {
+        padding: 10px 15px;
     }
-    /* 隐藏桌面stats，显示移动端stats */
-    .stats {
-        display: none;
+    .path-display {
+        font-size: 14px;
     }
-    .mobile-stats {
-        display: flex;
+    .nav-btn {
+        padding: 8px 15px;
+        font-size: 12px;
     }
-    /* 倒计时和移动端stats并排 */
-    .timer-container {
-        display: flex;
+    .hero h1 {
+        font-size: 36px;
+    }
+    .grade-selection {
+        flex-direction: column;
         align-items: center;
-        justify-content: space-around;
-        gap: 10px;
     }
-    .timer-circle {
-        margin: 0;
+    .grade-card {
+        width: 90%;
+        padding: 40px 20px;
     }
-    /* 选项按钮横向填充 */
+    .options-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
     #volumePage .options-grid,
     #modePage .options-grid {
         grid-template-columns: repeat(2, 1fr);
-        max-width: 100%;
-        padding: 0 10px;
-        box-sizing: border-box;
+        max-width: 400px;
     }
     .option-btn {
-        width: 100%;
-        padding: 15px 10px;
+        padding: 20px 15px;
         font-size: 16px;
-        min-height: auto;
     }
+    .game-container {
+        width: 95%;
+    }
+    .game-column {
+        width: 100%;
+        padding: 20px;
+        margin-top: 20px;
+    }
+    .stats {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .finish-buttons {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .setting-control {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .custom-modal-content {
+        padding: 20px;
+        width: 95%;
+    }
+    .custom-modal-btn {
+        padding: 10px 20px;
+        min-width: 100px;
+        font-size: 14px;
+    }
+    .custom-modal-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .review-container {
+        padding: 15px;
+        margin: 10px auto;
+    }
+    .review-header h2 {
+        font-size: 24px;
+    }
+    .review-question {
+        font-size: 16px;
+    }
+    .review-option {
+        padding: 8px 10px;
+        min-height: 40px;
+    }
+    .option-letter {
+        width: 26px;
+        height: 26px;
+        font-size: 12px;
+        margin-right: 10px;
+    }
+    .option-text {
+        font-size: 14px;
+    }
+    .review-nav-btn {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+}
+
+#volumePage .selection-level,
+#modePage .selection-level {
+    display: flex;
+    justify-content: center;
+}
+
+#volumePage .options-grid,
+#modePage .options-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    max-width: 500px;
 }
 
 @media (max-width: 480px) {
@@ -1451,48 +1500,49 @@ body.dark-theme .mobile-stats {
     #volumePage .options-grid,
     #modePage .options-grid {
         grid-template-columns: 1fr;
+        max-width: 300px;
     }
     .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .question-image {
+        max-width: 95%;
+    }
+    .question-image img {
+        max-height: 200px;
+    }
+    .review-option {
+        padding: 12px;
+    }
+    .option-letter {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+    }
+    .review-nav-buttons {
+        flex-direction: column;
         gap: 8px;
     }
-    .nav-btn {
-        padding: 8px 12px;
-        min-width: 50px;
-        font-size: 12px;
+    .review-nav-btn {
+        padding: 10px;
     }
 }
-
-.option,
-.option-btn,
-.grade-card,
-.nav-btn {
-    -webkit-tap-highlight-color: transparent;
-}
-
-.option:focus {
-    outline: none;
-}
-
-.option:active,
-.option-btn:active,
-.grade-card:active,
-.nav-btn:active {
-    transform: none !important;
-    box-shadow: none !important;
-}
-
 </style>
+
 
 </head>
 
 <body class="light-theme">
-    <!-- 首页 -->
     <div id="homePage" class="home-page">
         <div class="top-nav">
-            <div class="path-display" id="homePagePathDisplay"></div>
+            <div class="path-display" id="pathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
-                <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
+                <button id="homeNavBtn" class="nav-btn hidden" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
@@ -1526,12 +1576,11 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 年级分册页面 -->
     <div id="volumePage" class="chapter-page hidden">
         <div class="top-nav">
-            <div class="path-display" id="volumePagePathDisplay"></div>
+            <div class="path-display" id="volumePathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
+                <button id="volumeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1548,12 +1597,11 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 中考模式页面 -->
     <div id="modePage" class="chapter-page hidden">
         <div class="top-nav">
-            <div class="path-display" id="modePagePathDisplay"></div>
+            <div class="path-display" id="modePathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
+                <button id="modeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1576,12 +1624,11 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 章节页面 -->
     <div id="chapterPage" class="chapter-page hidden">
         <div class="top-nav">
-            <div class="path-display" id="chapterPagePathDisplay"></div>
+            <div class="path-display" id="chapterPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
+                <button id="chapterHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1595,12 +1642,11 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 小节页面 -->
     <div id="sectionPage" class="chapter-page hidden">
         <div class="top-nav">
-            <div class="path-display" id="sectionPagePathDisplay"></div>
+            <div class="path-display" id="sectionPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
+                <button id="sectionHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1614,7 +1660,6 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 答题页面 -->
     <div id="gamePage" class="hidden">
         <button class="nav-btn game-exit-btn" onclick="showExitConfirm()">🚪 退出</button>
         <div class="game-container">
@@ -1625,22 +1670,6 @@ body.dark-theme .mobile-stats {
                         <div class="timer-inner">
                             <div id="timerText">30</div>
                             <div id="timerLabel">秒</div>
-                        </div>
-                    </div>
-                    <!-- 移动端统计区 -->
-                    <div class="mobile-stats">
-                        <div class="mobile-stats-item">
-                            <span>📊分数</span>
-                            <span id="mobileScore" class="mobile-stats-value">0</span>
-                        </div>
-                        <div class="mobile-stats-item">
-                            <span>⚡连击</span>
-                            <span id="mobileCombo" class="mobile-stats-value">0</span>
-                            <span id="mobileFire" class="mobile-fire"></span>
-                        </div>
-                        <div class="mobile-stats-item">
-                            <span>🎖️段位</span>
-                            <span id="mobileRank" class="mobile-stats-value">青铜</span>
                         </div>
                     </div>
                 </div>
@@ -1682,13 +1711,11 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 完成页面 -->
     <div id="finishPage" class="hidden">
         <div class="top-nav">
-            <div class="path-display" id="finishPagePathDisplay"></div>
+            <div class="path-display" id="finishPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
-                <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
+                <button id="finishHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
@@ -1724,14 +1751,12 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 错题回顾页面 -->
     <div id="reviewPage" class="hidden">
         <div class="top-nav">
-            <div class="path-display" id="reviewPagePathDisplay"></div>
+            <div class="path-display" id="reviewPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBackFromReview()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
             </div>
         </div>
         <div class="review-container">
@@ -1762,14 +1787,13 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 设置页面 -->
     <div id="settingsPage" class="hidden">
         <div class="top-nav">
-            <div class="path-display" id="settingsPagePathDisplay"></div>
+            <div class="path-display" id="settingsPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn home-btn" onclick="showHome()">🏠 首页</button>
-                <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
+                <button id="settingsHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="saveSettings()">💾 保存设置</button>
+                <button class="nav-btn" onclick="showHome()">❌ 取消</button>
             </div>
         </div>
         <div class="settings">
@@ -1867,6 +1891,7 @@ body.dark-theme .mobile-stats {
                             <option value="10px">较小</option>
                             <option value="30px">中等</option>
                             <option value="50px">较大</option>
+
                         </select>
                     </div>
                 </div>
@@ -1895,7 +1920,6 @@ body.dark-theme .mobile-stats {
         </div>
     </div>
     
-    <!-- 自定义确认弹窗 -->
     <div id="customConfirmModal" class="custom-modal hidden">
         <div class="custom-modal-content">
             <div class="custom-modal-header">
@@ -1921,5 +1945,4 @@ body.dark-theme .mobile-stats {
 <script src="app.min.js"></script>
 
 </body>
-
 </html>
