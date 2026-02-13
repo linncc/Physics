@@ -1343,19 +1343,6 @@ body.dark-theme .review-option.wrong .option-letter {
     padding: 5px 10px;
 }
 
-#volumePage .selection-level,
-#modePage .selection-level {
-    display: flex;
-    justify-content: center;
-}
-
-#volumePage .options-grid,
-#modePage .options-grid {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    max-width: 500px;
-}
-
-    
 @media (max-width: 1024px) {
     .game-container {
         flex-direction: column;
@@ -1372,30 +1359,22 @@ body.dark-theme .review-option.wrong .option-letter {
 }
 
 @media (hover: none) and (pointer: coarse) {
-
-    /* 禁用所有 hover 效果 */
     .option-btn:hover,
     .grade-card:hover,
     .option:hover,
-    .nav-btn:hover,
-    .path-segment:hover {
+    .nav-btn:hover {
         transform: none !important;
         box-shadow: none !important;
-        background: unset !important;
-        border-color: unset !important;
-        color: unset !important;
+        background: inherit !important;
     }
-
-    /* 保留点击反馈（轻微 active 动效） */
-    .option-btn:active,
+    
     .grade-card:active,
     .option:active,
     .nav-btn:active {
-        transform: scale(0.97) !important;
-        transition: transform 0.1s ease !important;
+        transform: translateY(-2px) !important;
+        box-shadow: 0 5px 15px rgba(0,122,204,0.4) !important;
     }
 }
-
 
 
 @media (max-width: 768px) {
@@ -1502,6 +1481,18 @@ body.dark-theme .review-option.wrong .option-letter {
     }
 }
 
+#volumePage .selection-level,
+#modePage .selection-level {
+    display: flex;
+    justify-content: center;
+}
+
+#volumePage .options-grid,
+#modePage .options-grid {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    max-width: 500px;
+}
+
 @media (max-width: 480px) {
     .options-grid {
         grid-template-columns: 1fr;
@@ -1510,10 +1501,6 @@ body.dark-theme .review-option.wrong .option-letter {
     #modePage .options-grid {
         grid-template-columns: 1fr;
         max-width: 300px;
-    }
-    .nav-buttons {
-        flex-direction: column;
-        gap: 10px;
     }
     .nav-buttons {
         flex-direction: column;
@@ -1541,6 +1528,27 @@ body.dark-theme .review-option.wrong .option-letter {
         padding: 10px;
     }
 }
+
+/* ===== Mobile Active Fix ===== */
+.option,
+.option-btn,
+.grade-card,
+.nav-btn {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.option:focus {
+    outline: none;
+}
+
+.option:active,
+.option-btn:active,
+.grade-card:active,
+.nav-btn:active {
+    transform: none !important;
+    box-shadow: none !important;
+}
+
 </style>
 
 
@@ -1955,5 +1963,3 @@ body.dark-theme .review-option.wrong .option-letter {
 
 </body>
 </html>
-
-
