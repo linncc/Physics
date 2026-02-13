@@ -39,25 +39,49 @@ body.dark-theme {
     --text-color: white;
 }
 
+/* 深色主题下卡片背景统一 */
 body.dark-theme .card,
 body.dark-theme .game,
 body.dark-theme .leaderboard,
 body.dark-theme .settings,
 body.dark-theme .finish,
-body.dark-theme .review {
+body.dark-theme .review,
+body.dark-theme .game-card {
     background: var(--card-bg);
     border: 1px solid rgba(255,255,255,0.1);
     color: var(--text-color);
 }
 
-body.dark-theme .option {
+/* 深色主题下首页选择按钮透明 */
+body.dark-theme .grade-card {
     background: transparent;
-    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.3);
 }
-    
-body.dark-theme .stats {
-    background: rgba(0,0,0,0.3);
-    border: 1px solid rgba(255,255,255,0.1);
+body.dark-theme .grade-card:hover {
+    background: rgba(255,255,255,0.12);
+    border-color: var(--primary-color);
+}
+body.dark-theme .grade-card h3 {
+    color: var(--primary-color);
+}
+body.dark-theme .grade-card p {
+    color: #b0b0ff;
+}
+
+/* 深色主题下选项按钮透明 */
+body.dark-theme .option-btn {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: white;
+}
+body.dark-theme .option-btn:hover {
+    background: rgba(0,229,255,0.15);
+    border-color: var(--primary-color);
+}
+body.dark-theme .option-btn small {
+    color: #ccc;
 }
 
 .top-nav {
@@ -96,14 +120,6 @@ body.dark-theme .stats {
     color: #aaa;
 }
 
-.back-btn {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-}
-
-.back-btn:hover {
-    box-shadow: 0 5px 15px rgba(255, 152, 0, 0.4) !important;
-}
-
 .nav-buttons {
     display: flex;
     gap: 15px;
@@ -128,6 +144,10 @@ body.dark-theme .stats {
 .nav-btn:hover {
     transform: none;
     box-shadow: 0 5px 15px rgba(0,122,204,0.4);
+}
+
+.nav-btn.hidden {
+    display: none;
 }
 
 .home-page {
@@ -186,7 +206,6 @@ body.dark-theme .hero p {
     backdrop-filter: blur(10px);
     box-shadow: 0 6px 18px rgba(0,0,0,0.08);
 }
-
 
 .grade-card:hover {
     background: rgba(255,255,255,0.95);
@@ -293,175 +312,415 @@ body.dark-theme .page-header p {
     font-weight: normal;
 }
 
-body.dark-theme .option-btn {
-    background: rgba(255,255,255,0.08);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.2s ease;
+.hidden {
+    display: none;
 }
 
-body.dark-theme .option-btn:hover {
-    background: linear-gradient(
-        135deg,
-        rgba(0,229,255,0.25),
-        rgba(0,230,118,0.25)
-    );
-    border-color: rgba(0,229,255,0.6);
-    box-shadow: 0 0 15px rgba(0,229,255,0.5);
-    transform: none;
-}
-
-body.dark-theme .option-btn:active {
-    transform: scale(0.97);
-    box-shadow: 
-        inset 0 0 10px rgba(0,229,255,0.6),
-        0 0 8px rgba(0,229,255,0.4);
-}
-
-
-body.dark-theme .option-btn small {
-    color: #ccc;
-}
-
-.game-container {
-    width: 98%;
-    max-width: 1300px;
-    margin: 30px auto;
-    display: flex;
-    gap: 20px;
-    align-items: flex-start;
-}
-
-.timer-column {
-    flex: 0 0 200px;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 100px;
-}
-
-body.dark-theme .timer-column {
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-.game-column {
-    flex: 2;
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-}
-
-body.dark-theme .game-column {
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
-}
-
-.badges-column {
-    flex: 0 0 220px;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    position: sticky;
-    top: 100px;
-}
-
-body.dark-theme .badges-column {
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-}
-
-.timer-container {
+.question-image {
+    margin: 10px auto 2px auto;
+    max-width: 80%;
     text-align: center;
-    margin-bottom: 15px;
 }
 
-.timer-circle {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 15px;
-    box-shadow: 0 8px 20px rgba(0,122,204,0.3);
+.question-image img {
+    max-width: 100%;
+    max-height: 150px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.1);
 }
 
-.timer-inner {
-    background: white;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+body.dark-theme .question-image img {
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
-#timerText {
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--primary-color);
-}
-
-#timerLabel {
+.image-fallback {
+    color: #ff6b6b;
     font-size: 14px;
-    color: #666;
-    margin-top: 5px;
+    padding: 10px;
+    background: rgba(255,107,107,0.1);
+    border-radius: 8px;
+    margin-top: 10px;
 }
 
-body.dark-theme .timer-inner {
-    background: rgba(0,0,0,0.3);
+.custom-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(5px);
 }
 
-body.dark-theme #timerLabel {
-    color: #ccc;
+.custom-modal.hidden {
+    display: none;
 }
 
-.timer-column h3 {
-    text-align: center;
+.custom-modal-content {
+    background: rgba(255,255,255,0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border: 1px solid rgba(255,255,255,0.4);
+    animation: modalFadeIn 0.3s ease-out;
+}
+
+body.dark-theme .custom-modal-content {
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.custom-modal-header h3 {
     color: var(--accent-color);
-    margin-bottom: 20px;
-    font-size: 20px;
+    font-size: 24px;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
 
-.stats {
+.custom-modal-body p {
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0;
+}
+
+.custom-modal-footer {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    justify-content: center;
+    gap: 20px;
+}
+
+.custom-modal-btn {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 10px;
     font-size: 16px;
-    background: rgba(0,0,0,0.05);
-    padding: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.custom-modal-btn.cancel-btn {
+    background: rgba(0,0,0,0.1);
+    color: #333;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+.custom-modal-btn.cancel-btn:hover {
+    background: rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+body.dark-theme .custom-modal-btn.cancel-btn {
+    background: rgba(255,255,255,0.1);
+    color: white;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+body.dark-theme .custom-modal-btn.cancel-btn:hover {
+    background: rgba(255,255,255,0.2);
+}
+
+.custom-modal-btn.ok-btn {
+    background: linear-gradient(45deg, #ff6b6b, #ff5252);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+}
+
+.custom-modal-btn.ok-btn:hover {
+    background: linear-gradient(45deg, #ff5252, #ff3333);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255,107,107,0.4);
+}
+
+.review-container {
+    max-width: 700px;
+    margin: 0 auto auto auto;
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    min-height: auto;
+}
+
+.review-header {
+    text-align: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--danger-color);
+}
+
+.review-header h2 {
+    font-size: 28px;
+    color: var(--danger-color);
+    margin: 0;
+}
+
+.review-counter {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.review-question {
+    font-size: var(--question-font-size);
+    margin-bottom: 15px;
+    line-height: 1.4;
+    color: #333;
+}
+
+body.dark-theme .review-question {
+    color: white;
+}
+
+.review-image {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.review-image img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 10px;
+}
+
+.review-options {
+    margin: 15px 0;
+}
+
+.review-option {
+    background: rgba(255,255,255,0.95);
+    margin: 10px 0;
+    padding: 10px;
     border-radius: 12px;
     border: 1px solid rgba(0,0,0,0.05);
+    font-size: var(--option-font-size);
+    display: flex;
+    align-items: center;
+    min-height: var(--option-height);
+    color: #333;
+    line-height: 1.4;
 }
 
-.fire {
-    font-size: 20px;
-    color: #ff5722;
-    animation: pulse 0.6s infinite alternate;
-    filter: drop-shadow(0 0 5px #ff5722);
+body.dark-theme .review-option {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
 }
 
-@keyframes pulse {
-    from { transform: scale(1); filter: drop-shadow(0 0 5px #ff5722); }
-    to { transform: scale(1.2); filter: drop-shadow(0 0 8px #ff5722); }
+.review-option .option-letter {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+    font-weight: bold;
+    font-size: 14px;
 }
 
+.review-option .option-text {
+    flex: 1;
+}
+
+.review-option.correct {
+    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
+    border-color: rgba(0,168,107,0.5) !important;
+    box-shadow: 0 4px 15px rgba(0,230,118,0.01) !important;
+}
+
+.review-option.wrong {
+    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
+    border-color: rgba(255,51,51,0.5) !important;
+    box-shadow: 0 4px 15px rgba(255,82,82,0.01) !important;
+}
+
+body.dark-theme .review-option.correct .option-letter,
+body.dark-theme .review-option.wrong .option-letter {
+    color: white;
+}
+
+.review-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0,0,0,0.1);
+}
+
+.review-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 10px;
+}
+
+.review-nav-btn {
+    flex: 1;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.review-nav-btn:nth-child(1) {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: white;
+}
+
+.review-nav-btn:nth-child(2) {
+    background: linear-gradient(45deg, var(--accent-color), #ff9800);
+    color: white;
+}
+
+.review-nav-btn:nth-child(3) {
+    background: linear-gradient(45deg, var(--secondary-color), #4caf50);
+    color: white;
+}
+
+.review-nav-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.review-nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.no-wrong {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.no-wrong-icon {
+    font-size: 64px;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.no-wrong h3 {
+    color: var(--secondary-color);
+    margin-bottom: 15px;
+}
+
+/* ===== 答题页面卡片（支持PC三栏和移动卡片） ===== */
+.game-card {
+    max-width: 1300px;
+    margin: 20px auto;
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: 20px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+}
+
+body.dark-theme .game-card {
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+/* 默认移动端：隐藏左侧和右侧列，状态栏显示移动时间 */
+.game-left, .game-right {
+    display: none;
+}
+.mobile-timer {
+    display: inline-block;
+}
+.pc-timer {
+    display: none;
+}
+
+/* 选项样式（与错题回顾统一） */
+.option {
+    display: flex;
+    align-items: center;
+    background: rgba(255,255,255,0.95);
+    margin: 10px 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+    font-size: var(--option-font-size);
+    min-height: var(--option-height);
+    line-height: 1.4;
+}
+
+body.dark-theme .option {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: white;
+}
+
+.option .option-letter {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 14px;
+    font-weight: bold;
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+body.dark-theme .option .option-letter {
+    background: rgba(255,255,255,0.2);
+    color: white;
+}
+
+.option .option-text {
+    flex: 1;
+}
+
+.option.correct {
+    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
+    border-color: rgba(0,168,107,0.5) !important;
+}
+
+.option.wrong {
+    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
+    border-color: rgba(255,51,51,0.5) !important;
+}
+
+/* 进度条 */
 .progress {
     height: 10px;
     background: rgba(0,0,0,0.1);
@@ -497,72 +756,39 @@ body.dark-theme #timerLabel {
     100% { transform: translateX(100%); }
 }
 
-#question {
-    font-size: var(--question-font-size);
-    margin-bottom: 20px;
-    line-height: 1.5;
-    padding: 0 10px;
-    min-height: 60px;
+/* 状态栏 */
+.stats {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
-    font-weight: normal;
-    text-align: left;
-}
-
-.option {
-    background: rgba(255,255,255,0.95);
-    margin: 10px 0;
-    padding: 10px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background: rgba(0,0,0,0.05);
+    padding: 15px;
     border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
-    font-size: var(--option-font-size);
-    min-height: var(--option-height);
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    line-height: 1.4;
 }
 
-
-
-.correct {
-    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
-    border-color: rgba(0,168,107,0.5) !important;
-    box-shadow: 0 4px 15px rgba(0,230,118,0.01) !important;
-}
-
-.wrong {
-    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
-    border-color: rgba(255,51,51,0.5) !important;
-    box-shadow: 0 4px 15px rgba(255,82,82,0.01) !important;
-}
-
-.rank {
-    font-weight: bold;
-    color: #ff9900;
-    font-size: 18px;
-}
-
-.badges-column h3 {
-    text-align: center;
-    color: var(--accent-color);
-    margin-bottom: 20px;
+.fire {
     font-size: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
+    color: #ff5722;
+    animation: pulse 0.6s infinite alternate;
+    filter: drop-shadow(0 0 5px #ff5722);
 }
 
-.badges-list {
+@keyframes pulse {
+    from { transform: scale(1); filter: drop-shadow(0 0 5px #ff5722); }
+    to { transform: scale(1.2); filter: drop-shadow(0 0 8px #ff5722); }
+}
+
+/* 称号平铺 */
+#badgesList {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-    min-height: 150px;
+    flex-wrap: wrap;
+    gap: 10px;
+    background: transparent;
+    padding: 5px 0;
+    min-height: 50px;
+    justify-content: center;  /* 移动端居中 */
 }
 
 .badge-item {
@@ -577,6 +803,8 @@ body.dark-theme #timerLabel {
     opacity: 0;
     transform: translateY(10px);
     animation: fadeInUp 0.5s ease forwards;
+    margin: 0;
+    flex: 0 0 auto;
 }
 
 body.dark-theme .badge-item {
@@ -600,6 +828,140 @@ body.dark-theme .badge-item {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* 左侧计时器样式（PC） */
+.timer-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    box-shadow: 0 8px 20px rgba(0,122,204,0.3);
+}
+
+.timer-inner {
+    background: white;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+}
+
+body.dark-theme .timer-inner {
+    background: rgba(0,0,0,0.3);
+}
+
+#timerText {
+    font-size: 32px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+#timerLabel {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+body.dark-theme #timerLabel {
+    color: #ccc;
+}
+
+/* ===== PC端样式 (min-width: 1024px) ===== */
+@media (min-width: 1024px) {
+    .game-card {
+        display: grid;
+        grid-template-columns: 220px 1fr 240px;
+        gap: 20px;
+        align-items: start;
+        max-width: 1300px;
+    }
+    .game-header {
+        grid-column: 1 / -1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid var(--danger-color);
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+    .game-left, .game-right {
+        display: block;  /* 显示左右列 */
+        position: sticky;
+        top: 100px;
+    }
+    .game-left {
+        /* 左侧计时器列 */
+    }
+    .game-middle {
+        /* 中间答题列 */
+    }
+    .game-right {
+        /* 右侧称号列 */
+    }
+    .mobile-timer {
+        display: none;  /* 隐藏移动端时间 */
+    }
+    .pc-timer {
+        display: block;
+    }
+    .stats {
+        /* 中间的状态栏不需要调整 */
+    }
+    /* 左侧计时器容器样式 */
+    .timer-container {
+        text-align: center;
+        margin-bottom: 15px;
+    }
+    /* 称号列标题 */
+    .game-right h3 {
+        text-align: center;
+        color: var(--accent-color);
+        margin-bottom: 20px;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+    /* 称号在PC端改为纵向列表 */
+    #badgesList {
+        flex-direction: column;
+        gap: 12px;
+    }
+    .badge-item {
+        width: auto;
+    }
+}
+
+/* ===== 移动端选择页面按钮横向填充 ===== */
+@media (max-width: 767px) {
+    #volumePage .options-grid,
+    #modePage .options-grid {
+        grid-template-columns: 1fr 1fr;  /* 两个按钮平分宽度 */
+        max-width: none;
+        margin: 0 10px;
+    }
+    .option-btn {
+        width: 100%;
+        padding: 20px 10px;
+        font-size: 16px;
+        min-height: 100px;
+    }
+    /* 深色主题下按钮透明 */
+    body.dark-theme .option-btn {
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+}
+
+/* ===== 其他页面样式 ===== */
 .finish {
     width: 80%;
     max-width: 600px;
@@ -767,19 +1129,6 @@ body.dark-theme #leaderboard p {
 
 body.dark-theme #leaderboard p:hover {
     background: rgba(255,255,255,0.12);
-}
-
-#leaderboard p:nth-child(1) {
-    color: #ff9900;
-    font-weight: bold;
-}
-
-#leaderboard p:nth-child(2) {
-    color: #c0c0c0;
-}
-
-#leaderboard p:nth-child(3) {
-    color: #cd7f32;
 }
 
 .settings {
@@ -980,401 +1329,7 @@ body.dark-theme .btn-secondary:hover {
     background: rgba(255,255,255,0.2);
 }
 
-.hidden {
-    display: none;
-}
-
-.question-image {
-    margin: 10px auto 2px auto;
-    max-width: 80%;
-    text-align: center;
-}
-
-.question-image img {
-    max-width: 100%;
-    max-height: 150px;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    border: 1px solid rgba(0,0,0,0.1);
-}
-
-body.dark-theme .question-image img {
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.image-fallback {
-    color: #ff6b6b;
-    font-size: 14px;
-    padding: 10px;
-    background: rgba(255,107,107,0.1);
-    border-radius: 8px;
-    margin-top: 10px;
-}
-
-.game-exit-btn {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-}
-
-.custom-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0,0,0,0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 2000;
-    backdrop-filter: blur(5px);
-}
-
-.custom-modal.hidden {
-    display: none;
-}
-
-.custom-modal-content {
-    background: rgba(255,255,255,0.6);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 30px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-    border: 1px solid rgba(255,255,255,0.4);
-    animation: modalFadeIn 0.3s ease-out;
-}
-
-
-body.dark-theme .custom-modal-content {
-    border: 1px solid rgba(255,255,255,0.1);
-}
-
-@keyframes modalFadeIn {
-    from { opacity: 0; transform: translateY(-20px) scale(0.95); }
-    to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.custom-modal-header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.custom-modal-header h3 {
-    color: var(--accent-color);
-    font-size: 24px;
-    margin: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.custom-modal-body {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-.custom-modal-body p {
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--text-color);
-    margin: 0;
-}
-
-.custom-modal-footer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-}
-
-.custom-modal-btn {
-    padding: 12px 30px;
-    border: none;
-    border-radius: 10px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    min-width: 120px;
-}
-
-.custom-modal-btn.cancel-btn {
-    background: rgba(0,0,0,0.1);
-    color: #333;
-    border: 1px solid rgba(0,0,0,0.2);
-}
-
-.custom-modal-btn.cancel-btn:hover {
-    background: rgba(0,0,0,0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-body.dark-theme .custom-modal-btn.cancel-btn {
-    background: rgba(255,255,255,0.1);
-    color: white;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-body.dark-theme .custom-modal-btn.cancel-btn:hover {
-    background: rgba(255,255,255,0.2);
-}
-
-.custom-modal-btn.ok-btn {
-    background: linear-gradient(45deg, #ff6b6b, #ff5252);
-    color: white;
-    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
-}
-
-.custom-modal-btn.ok-btn:hover {
-    background: linear-gradient(45deg, #ff5252, #ff3333);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255,107,107,0.4);
-}
-
-.review-container {
-    max-width: 700px;
-    margin: 0 auto auto auto;
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    min-height: auto;
-}
-
-.review-header {
-    text-align: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--danger-color);
-}
-
-.review-header h2 {
-    font-size: 28px;
-    color: var(--danger-color);
-    margin: 0;
-}
-
-.review-counter {
-    text-align: center;
-    color: #666;
-    font-size: 16px;
-    margin-bottom: 20px;
-}
-
-.review-question {
-    font-size: var(--question-font-size);
-    margin-bottom: 15px;
-    line-height: 1.4;
-    color: #333;
-}
-
-body.dark-theme .review-question {
-    color: white;
-}
-
-.review-image {
-    text-align: center;
-    margin: 20px 0;
-}
-
-.review-image img {
-    max-width: 100%;
-    max-height: 200px;
-    border-radius: 10px;
-}
-
-.review-options {
-    margin: 15px 0;
-}
-
-.review-option {
-    background: rgba(255,255,255,0.95);
-    margin: 10px 0;
-    padding: 10px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.05);
-    font-size: var(--option-font-size);
-    display: flex;
-    align-items: center;
-    min-height: var(--option-height);
-    color: #333;
-    line-height: 1.4;
-}
-
-body.dark-theme .review-option {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: white;
-}
-
-.review-option .option-letter {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 12px;
-    font-weight: bold;
-    font-size: 14px;
-}
-
-.review-option .option-text {
-    flex: 1;
-}
-
-.review-option.correct {
-    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
-    border-color: rgba(0,168,107,0.5) !important;
-    box-shadow: 0 4px 15px rgba(0,230,118,0.01) !important;
-}
-
-.review-option.wrong {
-    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
-    border-color: rgba(255,51,51,0.5) !important;
-    box-shadow: 0 4px 15px rgba(255,82,82,0.01) !important;
-}
-
-body.dark-theme .review-option.correct .option-letter,
-body.dark-theme .review-option.wrong .option-letter {
-    color: white;
-}
-
-.review-answer-info {
-    display: none;
-}
-
-.review-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-}
-
-.review-nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 10px;
-}
-
-.review-nav-btn {
-    flex: 1;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.review-nav-btn:nth-child(1) {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: white;
-}
-
-.review-nav-btn:nth-child(2) {
-    background: linear-gradient(45deg, var(--accent-color), #ff9800);
-    color: white;
-}
-
-.review-nav-btn:nth-child(3) {
-    background: linear-gradient(45deg, var(--secondary-color), #4caf50);
-    color: white;
-}
-
-.review-nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.review-nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.review-action {
-    display: none;
-}
-
-.no-wrong {
-    text-align: center;
-    padding: 60px 20px;
-}
-
-.no-wrong-icon {
-    font-size: 64px;
-    color: var(--secondary-color);
-    margin-bottom: 20px;
-}
-
-.no-wrong h3 {
-    color: var(--secondary-color);
-    margin-bottom: 15px;
-}
-
-.option[style*="--option-height: 35px"],
-.option[style*="--option-height: 40px"] {
-    padding: 5px 10px;
-}
-
-.review-option[style*="--option-height: 35px"],
-.review-option[style*="--option-height: 40px"] {
-    padding: 5px 10px;
-}
-
-@media (max-width: 1024px) {
-    .game-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .timer-column, .badges-column {
-        position: static;
-        width: 100%;
-    }
-}
-
-.no-hover * {
-    pointer-events: none !important;
-}
-
-@media (hover: none) and (pointer: coarse) {
-    .option-btn:hover,
-    .grade-card:hover,
-    .option:hover,
-    .nav-btn:hover {
-        transform: none !important;
-        box-shadow: none !important;
-        background: inherit !important;
-    }
-    
-    .grade-card:active,
-    .option:active,
-    .nav-btn:active {
-        transform: translateY(-2px) !important;
-        box-shadow: 0 5px 15px rgba(0,122,204,0.4) !important;
-    }
-}
-
-
+/* 移动端适应 */
 @media (max-width: 768px) {
     .top-nav {
         padding: 10px 15px;
@@ -1401,28 +1356,9 @@ body.dark-theme .review-option.wrong .option-letter {
         grid-template-columns: repeat(2, 1fr);
         gap: 15px;
     }
-    #volumePage .options-grid,
-    #modePage .options-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 400px;
-    }
     .option-btn {
         padding: 20px 15px;
         font-size: 16px;
-    }
-    .game-container {
-        width: 95%;
-    }
-    .game-column {
-        width: 100%;
-        padding: 20px;
-        margin-top: 20px;
-    }
-    .stats {
-        flex-direction: column;
-        gap: 12px;
-        text-align: center;
-        font-size: 14px;
     }
     .finish-buttons {
         flex-direction: column;
@@ -1477,18 +1413,10 @@ body.dark-theme .review-option.wrong .option-letter {
         padding: 8px 12px;
         font-size: 13px;
     }
-}
-
-#volumePage .selection-level,
-#modePage .selection-level {
-    display: flex;
-    justify-content: center;
-}
-
-#volumePage .options-grid,
-#modePage .options-grid {
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
-    max-width: 500px;
+    /* 移动端勋章居中 */
+    #badgesList {
+        justify-content: center;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1497,8 +1425,7 @@ body.dark-theme .review-option.wrong .option-letter {
     }
     #volumePage .options-grid,
     #modePage .options-grid {
-        grid-template-columns: 1fr;
-        max-width: 300px;
+        grid-template-columns: 1fr 1fr;  /* 保持两个横向填充 */
     }
     .nav-buttons {
         flex-direction: column;
@@ -1546,103 +1473,17 @@ body.dark-theme .review-option.wrong .option-letter {
     transform: none !important;
     box-shadow: none !important;
 }
-
-/* ========== 新增样式（答题卡片统一风格） ========== */
-.game-card {
-    max-width: 700px;
-    margin: 20px auto;
-    background: var(--card-bg);
-    padding: 25px;
-    border-radius: 20px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    backdrop-filter: blur(10px);
-}
-
-body.dark-theme .game-card {
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-}
-
-/* 选项与错题回顾完全统一 */
-.option {
-    display: flex;
-    align-items: center;
-    background: rgba(255,255,255,0.95);
-    margin: 10px 0;
-    padding: 12px 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    border: 1px solid rgba(0,0,0,0.05);
-    font-size: var(--option-font-size);
-    min-height: var(--option-height);
-    line-height: 1.4;
-}
-
-body.dark-theme .option {
-    background: rgba(255,255,255,0.1);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: white;
-}
-
-.option .option-letter {
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background: rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 14px;
-    font-weight: bold;
-    font-size: 15px;
-    flex-shrink: 0;
-}
-
-body.dark-theme .option .option-letter {
-    background: rgba(255,255,255,0.2);
-    color: white;
-}
-
-.option .option-text {
-    flex: 1;
-}
-
-.option.correct {
-    background: linear-gradient(90deg, rgba(0,168,107,0.7), rgba(76,175,80,0.7)) !important;
-    border-color: rgba(0,168,107,0.5) !important;
-}
-
-.option.wrong {
-    background: linear-gradient(90deg, rgba(255,51,51,0.7), rgba(255,64,129,0.7)) !important;
-    border-color: rgba(255,51,51,0.5) !important;
-}
-
-/* 称号平铺布局（覆盖原 badges-list） */
-#badgesList {
-    display: flex !important;
-    flex-wrap: wrap !important;
-    gap: 10px !important;
-    background: transparent !important;
-    padding: 5px 0 !important;
-    min-height: 50px;
-}
-
-.badge-item {
-    margin: 0 !important;
-    flex: 0 0 auto;
-}
 </style>
-
 </head>
 
 <body class="light-theme">
+    <!-- 首页 -->
     <div id="homePage" class="home-page">
         <div class="top-nav">
             <div class="path-display" id="pathDisplay"></div>
             <div class="nav-buttons">
-                <button id="homeNavBtn" class="nav-btn hidden" onclick="showHome()">🏠 首页</button>
+                <button id="homeHomeBtn" class="nav-btn hidden" onclick="showHome()">🏠 首页</button>
+                <button id="homeBackBtn" class="nav-btn hidden" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
@@ -1676,11 +1517,12 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
+    <!-- 上下册选择页 -->
     <div id="volumePage" class="chapter-page hidden">
         <div class="top-nav">
             <div class="path-display" id="volumePathDisplay"></div>
             <div class="nav-buttons">
-                <button id="volumeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1697,11 +1539,12 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
+    <!-- 中考模式选择页 -->
     <div id="modePage" class="chapter-page hidden">
         <div class="top-nav">
             <div class="path-display" id="modePathDisplay"></div>
             <div class="nav-buttons">
-                <button id="modeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1724,11 +1567,12 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
+    <!-- 章节选择页 -->
     <div id="chapterPage" class="chapter-page hidden">
         <div class="top-nav">
             <div class="path-display" id="chapterPathDisplay"></div>
             <div class="nav-buttons">
-                <button id="chapterHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1742,11 +1586,12 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
+    <!-- 小节选择页 -->
     <div id="sectionPage" class="chapter-page hidden">
         <div class="top-nav">
             <div class="path-display" id="sectionPathDisplay"></div>
             <div class="nav-buttons">
-                <button id="sectionHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
@@ -1760,75 +1605,76 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
-    <!-- ========== 答题页面（重构为卡片风格，与错题回顾统一） ========== -->
+    <!-- ========== 答题页面（支持PC三栏和移动卡片） ========== -->
     <div id="gamePage" class="hidden">
         <div class="game-card">
-            <!-- 卡片头部：标题 + 退出按钮（保留 game-exit-btn 类） -->
-            <div class="game-header" style="display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--danger-color); margin-bottom: 20px; padding-bottom: 10px;">
+            <!-- 卡片头部：标题 + 退出按钮 -->
+            <div class="game-header">
                 <h2 style="color: var(--danger-color); margin: 0; font-size: 24px;">⚡ 答题模式</h2>
                 <button class="nav-btn game-exit-btn" onclick="showExitConfirm()" style="background: linear-gradient(45deg, #ff6b6b, #ff5252);">🚪 退出</button>
             </div>
             
-            <!-- 状态栏：分数 / 连击 / 段位 / 计时（保留原有 ID） -->
-            <div style="display: flex; justify-content: space-between; margin-bottom: 15px; background: rgba(0,0,0,0.03); padding: 12px; border-radius: 12px;">
-                <div><span style="color:var(--primary-color); font-weight: 500;">📊 分数</span> <span id="score">0</span></div>
-                <div><span style="color:var(--accent-color); font-weight: 500;">⚡ 连击</span> <span id="combo">0</span><span id="fire"></span></div>
-                <div><span style="color:#ff9900; font-weight: 500;">🎖️ 段位</span> <span id="rank">青铜</span></div>
-                <div><span style="color:var(--danger-color); font-weight: 500;">⏰ 剩余</span> <span id="timerText">30</span>秒</div>
-            </div>
-            
-            <!-- 进度条（保留原有 ID） -->
-            <div class="progress" style="margin-bottom: 20px;">
-                <div id="progressBar"></div>
-            </div>
-            
-            <!-- 题目区域（保留原有 ID） -->
-            <div id="question" class="review-question" style="font-size: var(--question-font-size); margin-bottom: 20px; line-height: 1.5;"></div>
-            
-            <!-- 选项区域（保留原有 ID） -->
-            <div id="options" class="review-options" style="margin-bottom: 20px;"></div>
-            
-            <!-- 称号区域（平铺布局） -->
-            <div style="margin-top: 20px; border-top: 1px solid rgba(0,0,0,0.1); padding-top: 15px;">
-                <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-                    <span style="color: var(--accent-color); font-weight: bold;">🏅 已获得称号</span>
+            <!-- 左侧列：计时器（PC显示） -->
+            <div class="game-left">
+                <h3>⏰ 倒计时</h3>
+                <div class="timer-container">
+                    <div class="timer-circle">
+                        <div class="timer-inner">
+                            <div id="timerText">30</div>
+                            <div id="timerLabel">秒</div>
+                        </div>
+                    </div>
                 </div>
-                <div id="badgesList" style="display: flex; flex-wrap: wrap; gap: 10px; min-height: 50px;"></div>
+                <div style="text-align:center;font-size:14px;color:#666">
+                    每题限时 <span id="timeLimitDisplay">45</span> 秒
+                </div>
+            </div>
+            
+            <!-- 中间列：答题核心区域 -->
+            <div class="game-middle">
+                <!-- 状态栏（移动端含时间） -->
+                <div class="stats">
+                    <div><span style="color:var(--primary-color);">📊 分数:</span> <span id="score">0</span></div>
+                    <div><span style="color:var(--accent-color);">⚡ 连击:</span> <span id="combo">0</span><span id="fire"></span></div>
+                    <div><span style="color:#ff9900;">🎖️ 段位:</span> <span id="rank">青铜</span></div>
+                    <div class="mobile-timer"><span style="color:var(--danger-color);">⏰ 剩余</span> <span id="timerTextMobile">30</span>秒</div>
+                </div>
+                <!-- 进度条 -->
+                <div class="progress">
+                    <div id="progressBar"></div>
+                </div>
+                <!-- 题目 -->
+                <div id="question" class="review-question"></div>
+                <!-- 选项 -->
+                <div id="options" class="review-options"></div>
+            </div>
+            
+            <!-- 右侧列：称号列表（PC显示纵向，移动端在底部居中） -->
+            <div class="game-right">
+                <h3>🏅 已获得称号</h3>
+                <div id="badgesList"></div>
             </div>
         </div>
     </div>
     
+    <!-- 完成页 -->
     <div id="finishPage" class="hidden">
         <div class="top-nav">
             <div class="path-display" id="finishPathDisplay"></div>
             <div class="nav-buttons">
-                <button id="finishHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn hidden" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="finish">
             <h2>🎉 挑战完成！</h2>
             <div class="finish-stats">
-                <div class="stat-item">
-                    <span>最终得分:</span>
-                    <span id="finalScore" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span>最高连击:</span>
-                    <span id="finalCombo" class="stat-value">0</span>
-                </div>
-                <div class="stat-item">
-                    <span>达成段位:</span>
-                    <span id="finalRank" class="stat-value">青铜</span>
-                </div>
-                <div class="stat-item">
-                    <span>正确率:</span>
-                    <span id="accuracy" class="stat-value">0%</span>
-                </div>
-                <div class="stat-item">
-                    <span>获得称号:</span>
-                    <span id="finalBadges" class="stat-value"></span>
-                </div>
+                <div class="stat-item"><span>最终得分:</span><span id="finalScore" class="stat-value">0</span></div>
+                <div class="stat-item"><span>最高连击:</span><span id="finalCombo" class="stat-value">0</span></div>
+                <div class="stat-item"><span>达成段位:</span><span id="finalRank" class="stat-value">青铜</span></div>
+                <div class="stat-item"><span>正确率:</span><span id="accuracy" class="stat-value">0%</span></div>
+                <div class="stat-item"><span>获得称号:</span><span id="finalBadges" class="stat-value"></span></div>
             </div>
             <div class="finish-buttons">
                 <button id="reviewBtn" style="display:none" onclick="reviewWrongQuestions()">📚 错题回顾</button>
@@ -1838,18 +1684,18 @@ body.dark-theme .option .option-letter {
         </div>
     </div>
     
+    <!-- 错题回顾页 -->
     <div id="reviewPage" class="hidden">
         <div class="top-nav">
             <div class="path-display" id="reviewPathDisplay"></div>
             <div class="nav-buttons">
                 <button class="nav-btn back-btn" onclick="goBackFromReview()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn hidden" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="review-container">
-            <div class="review-header">
-                <h2>📚 错题回顾</h2>
-            </div>
+            <div class="review-header"><h2>📚 错题回顾</h2></div>
             <div class="review-counter" id="reviewCounter"></div>
             <div class="review-question" id="reviewQuestion"></div>
             <div class="review-image" id="reviewImage"></div>
@@ -1857,28 +1703,21 @@ body.dark-theme .option .option-letter {
             <div class="review-answer-info" id="reviewAnswerInfo"></div>
             <div class="review-nav">
                 <div class="review-nav-buttons">
-                    <button class="review-nav-btn" id="prevBtn" onclick="prevWrongQuestion()">
-                        <span>⬅️</span>
-                        <span>上一题</span>
-                    </button>
-                    <button class="review-nav-btn" onclick="restartGame()">
-                        <span>🔄</span>
-                        <span>再次挑战</span>
-                    </button>
-                    <button class="review-nav-btn" id="nextBtn" onclick="nextWrongQuestion()">
-                        <span>下一题</span>
-                        <span>➡️</span>
-                    </button>
+                    <button class="review-nav-btn" id="prevBtn" onclick="prevWrongQuestion()"><span>⬅️</span><span>上一题</span></button>
+                    <button class="review-nav-btn" onclick="restartGame()"><span>🔄</span><span>再次挑战</span></button>
+                    <button class="review-nav-btn" id="nextBtn" onclick="nextWrongQuestion()"><span>下一题</span><span>➡️</span></button>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- 设置页 -->
     <div id="settingsPage" class="hidden">
         <div class="top-nav">
             <div class="path-display" id="settingsPathDisplay"></div>
             <div class="nav-buttons">
-                <button id="settingsHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn hidden" onclick="goBack()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="saveSettings()">💾 保存设置</button>
                 <button class="nav-btn" onclick="showHome()">❌ 取消</button>
             </div>
@@ -1890,10 +1729,7 @@ body.dark-theme .option .option-letter {
                 <div class="setting-item">
                     <div class="setting-label">主题模式</div>
                     <div class="setting-control">
-                        <label class="switch">
-                            <input type="checkbox" id="themeToggle">
-                            <span class="slider"></span>
-                        </label>
+                        <label class="switch"><input type="checkbox" id="themeToggle"><span class="slider"></span></label>
                         <span id="themeLabel">浅色主题</span>
                     </div>
                 </div>
@@ -1904,20 +1740,14 @@ body.dark-theme .option .option-letter {
                     <div class="setting-label">每模块题目数量</div>
                     <div class="setting-control">
                         <select id="questionCount" class="select-box">
-                            <option value="5">5题</option>
-                            <option value="10" selected>10题</option>
-                            <option value="15">15题</option>
-                            <option value="20">20题</option>
+                            <option value="5">5题</option><option value="10" selected>10题</option><option value="15">15题</option><option value="20">20题</option>
                         </select>
                     </div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-label">连击加成</div>
                     <div class="setting-control">
-                        <label class="switch">
-                            <input type="checkbox" id="comboBonusToggle" checked>
-                            <span class="slider"></span>
-                        </label>
+                        <label class="switch"><input type="checkbox" id="comboBonusToggle" checked><span class="slider"></span></label>
                         <span id="comboBonusLabel">开启</span>
                     </div>
                 </div>
@@ -1925,11 +1755,7 @@ body.dark-theme .option .option-letter {
                     <div class="setting-label">答题时间限制</div>
                     <div class="setting-control">
                         <select id="timeLimit" class="select-box">
-                            <option value="0">无限制</option>
-                            <option value="15">15秒</option>
-                            <option value="30">30秒</option>
-                            <option value="45" selected>45秒</option>
-                            <option value="60">60秒</option>
+                            <option value="0">无限制</option><option value="15">15秒</option><option value="30">30秒</option><option value="45" selected>45秒</option><option value="60">60秒</option>
                         </select>
                     </div>
                 </div>
@@ -1939,10 +1765,7 @@ body.dark-theme .option .option-letter {
                 <div class="setting-item">
                     <div class="setting-label">音效</div>
                     <div class="setting-control">
-                        <label class="switch">
-                            <input type="checkbox" id="soundEffectToggle" checked>
-                            <span class="slider"></span>
-                        </label>
+                        <label class="switch"><input type="checkbox" id="soundEffectToggle" checked><span class="slider"></span></label>
                         <span id="soundEffectLabel">开启</span>
                     </div>
                 </div>
@@ -1967,17 +1790,14 @@ body.dark-theme .option .option-letter {
                     <div class="setting-label">选项文字大小</div>
                     <div class="setting-control">
                         <input type="range" id="optionFontSizeSlider" class="slider-range" min="14" max="24" value="18">
-                        <span id="optionFontSizeValue">16px</span>
+                        <span id="optionFontSizeValue">18px</span>
                     </div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-label">选项高度</div>
                     <div class="setting-control">
                         <select id="optionHeightSelect" class="select-box">
-                            <option value="auto">自动高度</option>
-                            <option value="10px">较小</option>
-                            <option value="30px">中等</option>
-                            <option value="50px">较大</option>
+                            <option value="auto">自动高度</option><option value="10px">较小</option><option value="30px">中等</option><option value="50px">较大</option>
                         </select>
                     </div>
                 </div>
@@ -1986,34 +1806,25 @@ body.dark-theme .option .option-letter {
                 <h3>📊 数据管理</h3>
                 <div class="setting-item">
                     <div class="setting-label">清除排行榜数据</div>
-                    <div class="setting-control">
-                        <button class="btn btn-secondary" onclick="clearLeaderboard()">清除</button>
-                    </div>
+                    <div class="setting-control"><button class="btn btn-secondary" onclick="clearLeaderboard()">清除</button></div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-label">重置所有设置</div>
-                    <div class="setting-control">
-                        <button class="btn btn-secondary" onclick="resetSettings()">重置</button>
-                    </div>
+                    <div class="setting-control"><button class="btn btn-secondary" onclick="resetSettings()">重置</button></div>
                 </div>
                 <div class="setting-item">
                     <div class="setting-label">导出游戏数据</div>
-                    <div class="setting-control">
-                        <button class="btn btn-secondary" onclick="exportData()">导出</button>
-                    </div>
+                    <div class="setting-control"><button class="btn btn-secondary" onclick="exportData()">导出</button></div>
                 </div>
             </div>
         </div>
     </div>
     
+    <!-- 自定义确认弹窗 -->
     <div id="customConfirmModal" class="custom-modal hidden">
         <div class="custom-modal-content">
-            <div class="custom-modal-header">
-                <h3>⚠️ 确认退出</h3>
-            </div>
-            <div class="custom-modal-body">
-                <p>确定要退出当前游戏吗？未完成的进度将丢失。</p>
-            </div>
+            <div class="custom-modal-header"><h3>⚠️ 确认退出</h3></div>
+            <div class="custom-modal-body"><p>确定要退出当前游戏吗？未完成的进度将丢失。</p></div>
             <div class="custom-modal-footer">
                 <button id="confirmCancelBtn" class="custom-modal-btn cancel-btn">取消</button>
                 <button id="confirmOkBtn" class="custom-modal-btn ok-btn">确定退出</button>
@@ -2026,10 +1837,7 @@ body.dark-theme .option .option-letter {
 <script src="data/grade8_2.min.js"></script>
 <script src="data/grade9_1.min.js"></script>
 <script src="data/grade9_2.min.js"></script>
-
 <!-- 主逻辑 -->
 <script src="app.min.js"></script>
-
 </body>
-
 </html>
