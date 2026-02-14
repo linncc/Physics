@@ -695,32 +695,34 @@ body.dark-theme .stat-item {
     box-shadow: 0 4px 15px rgba(0,122,204,0.3);
 }
 
-#restartBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,122,204,0.4);
-}
-
 #homeBtn {
     background: linear-gradient(45deg, #ff6b6b, #ffa726);
     color: white;
     box-shadow: 0 4px 15px rgba(255,107,107,0.3);
 }
 
-#homeBtn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255,107,107,0.4);
-}
-
 #reviewBtn {
     background: linear-gradient(45deg, #ff4757, #ff6b6b);
     color: white;
-    box-shadow: 0 4px 15px rgba(255,71,87,0.3);
+    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
 }
 
-#reviewBtn:hover {
-    background: linear-gradient(45deg, #ff3838, #ff5252);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255,71,87,0.4);
+#prevBtn {
+    background: linear-gradient(45deg, #ff4757, #ff6b6b);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+}
+
+#nextBtn {
+    background: linear-gradient(45deg, #ff6b6b, #ffa726);
+    color: white;
+    box-shadow: 0 4px 15px rgba(255,107,107,0.3);
+}
+
+#prevBtn:disabled,
+#nextBtn:disabled {
+    opacity: 0.5; 
+    cursor: not-allowed;
 }
 
 .leaderboard {
@@ -1266,68 +1268,6 @@ body.dark-theme .review-option.wrong .option-letter {
     display: none;
 }
 
-.review-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0,0,0,0.1);
-}
-
-.review-nav-buttons {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 100px;
-}
-
-.review-nav-btn {
-    flex: 1;
-    padding: 15px 15px;
-    border: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-}
-
-.review-nav-btn:nth-child(1) {
-    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
-    color: white;
-}
-
-.review-nav-btn:nth-child(2) {
-    background: linear-gradient(45deg, var(--accent-color), #ff9800);
-    color: white;
-}
-
-.review-nav-btn:nth-child(3) {
-    background: linear-gradient(45deg, var(--secondary-color), #4caf50);
-    color: white;
-}
-
-.review-nav-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-
-.review-nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-.review-action {
-    display: none;
-}
-
 .no-wrong {
     text-align: center;
     padding: 60px 20px;
@@ -1477,10 +1417,6 @@ body.dark-theme .review-option.wrong .option-letter {
     .option-text {
         font-size: 14px;
     }
-    .review-nav-btn {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
 }
 
 #volumePage .selection-level,
@@ -1516,13 +1452,6 @@ body.dark-theme .review-option.wrong .option-letter {
         height: 30px;
         margin-right: 10px;
     }
-    .review-nav-buttons {
-        flex-direction: column;
-        gap: 8px;
-    }
-    .review-nav-btn {
-        padding: 10px;
-    }
 }
 
 /* ===== Mobile Active Fix ===== */
@@ -1544,9 +1473,7 @@ body.dark-theme .review-option.wrong .option-letter {
     transform: none !important;
     box-shadow: none !important;
 }
-
 </style>
-
 
 </head>
 
@@ -1586,9 +1513,9 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="volumePathDisplay"></div>
             <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="volumeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="page-header">
@@ -1607,9 +1534,9 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="modePathDisplay"></div>
             <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="modeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="page-header">
@@ -1634,9 +1561,9 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="chapterPathDisplay"></div>
             <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="chapterHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="page-header">
@@ -1652,9 +1579,9 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="sectionPathDisplay"></div>
             <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="sectionHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
             </div>
         </div>
         <div class="page-header">
@@ -1723,8 +1650,8 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="finishPathDisplay"></div>
             <div class="nav-buttons">
-                <button id="finishHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
+                <button id="finishHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
             </div>
         </div>
         <div class="finish">
@@ -1763,8 +1690,8 @@ body.dark-theme .review-option.wrong .option-letter {
         <div class="top-nav">
             <div class="path-display" id="reviewPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn back-btn" onclick="goBackFromReview()">⬅️ 返回</button>
                 <button class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn back-btn" onclick="goBackFromReview()">⬅️ 返回</button>
             </div>
         </div>
         <div class="review-container">
@@ -1776,26 +1703,14 @@ body.dark-theme .review-option.wrong .option-letter {
             <div class="review-image" id="reviewImage"></div>
             <div class="review-options" id="reviewOptions"></div>
             <div class="review-answer-info" id="reviewAnswerInfo"></div>
-            <div class="review-nav">
-                <div class="review-nav-buttons">
-                    <button class="review-nav-btn" id="prevBtn" onclick="prevWrongQuestion()">
-                        <span>⬅️</span>
-                        <span>上一题</span>
-                    </button>
-                    <button class="review-nav-btn" onclick="restartGame()">
-                        <span>🔄</span>
-                        <span>再次挑战</span>
-                    </button>
-                    <button class="review-nav-btn" id="nextBtn" onclick="nextWrongQuestion()">
-                        <span>下一题</span>
-                        <span>➡️</span>
-                    </button>
-                </div>
+            <div class="finish-buttons">
+                <button id="prevBtn"  onclick="prevWrongQuestion()">⬅️ 上一题</button>
+                <button id="restartBtn" onclick="restartGame()">🔄 再次挑战</button>
+                <button id="nextBtn" onclick="nextWrongQuestion()">下一题 ➡️</button>
             </div>
         </div>
     </div>
   
-
     <div id="settingsPage" class="hidden">
         <div class="top-nav">
             <div class="path-display" id="chapterPathDisplay"></div>
@@ -1930,11 +1845,11 @@ body.dark-theme .review-option.wrong .option-letter {
                 <h3>⚠️ 确认退出</h3>
             </div>
             <div class="custom-modal-body">
-                <p>确定要退出当前游戏吗？未完成的进度将丢失。</p>
+                <p>未完成的进度将丢失，确定要退出当前游戏吗？</p>
             </div>
             <div class="custom-modal-footer">
                 <button id="confirmCancelBtn" class="custom-modal-btn cancel-btn">取消</button>
-                <button id="confirmOkBtn" class="custom-modal-btn ok-btn">确定退出</button>
+                <button id="confirmOkBtn" class="custom-modal-btn ok-btn">确定</button>
             </div>
         </div>
     </div>
