@@ -1720,7 +1720,7 @@ body.dark-theme .review-option.wrong .option-letter {
             <div class="finish-buttons">
                 <button id="reviewBtn" style="display:none" onclick="reviewWrongQuestions()">📚 错题回顾</button>
                 <button id="restartBtn" onclick="restartGame()">🔄 再次挑战</button>
-                <button id="homeBtn" onclick="showHome()">🏠 返回首页</button>
+                <button id="homeBtn" onclick="goToPreviousFromFinish()">🎯 换题训练</button>
             </div>
         </div>
     </div>
@@ -1755,7 +1755,7 @@ body.dark-theme .review-option.wrong .option-letter {
             <div class="path-display" id="chapterPathDisplay"></div>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="saveSettings()">💾 保存</button>
-                <button class="nav-btn" onclick="showHome()">❌ 取消</button>
+                <button class="nav-btn" onclick="goBackFromSettings()">❌ 取消</button>
             </div>
         </div>
         <div class="settings">
