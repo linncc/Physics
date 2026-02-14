@@ -1417,6 +1417,36 @@ body.dark-theme .review-option.wrong .option-letter {
     .option-text {
         font-size: 14px;
     }
+    .setting-item {
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        gap: 8px;
+    }
+    .setting-label {
+        flex: 0 0 auto;
+        width: 90px;
+        font-size: 14px;
+    }
+    .setting-control {
+        flex: 1 1 auto;
+        width: auto !important;
+        justify-content: flex-end !important;
+        gap: 8px;
+        flex-wrap: nowrap;
+    }
+    .slider-range {
+        min-width: 80px;
+        width: 100%;
+    }
+    .select-box {
+        min-width: 70px;
+        width: auto;
+    }
+    .setting-control .switch,
+    .setting-control span:not(.slider) {
+        white-space: nowrap;
+    }
 }
 
 #volumePage .selection-level,
@@ -1451,6 +1481,16 @@ body.dark-theme .review-option.wrong .option-letter {
         width: 30px;
         height: 30px;
         margin-right: 10px;
+    }
+    .setting-label {
+        width: 70px;
+        font-size: 12px;
+    }
+    .setting-control {
+        gap: 4px;
+    }
+    .slider-range {
+        min-width: 60px;
     }
 }
 
@@ -1866,6 +1906,3 @@ body.dark-theme .review-option.wrong .option-letter {
 </body>
 
 </html>
-
-
-
