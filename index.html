@@ -37,7 +37,7 @@ body.dark-theme {
     --card-bg: rgba(255,255,255,0.08);
     --text-color: white;
 }
-
+body.dark-theme .grade-card,
 body.dark-theme .card,
 body.dark-theme .game,
 body.dark-theme .leaderboard,
@@ -45,7 +45,7 @@ body.dark-theme .settings,
 body.dark-theme .finish,
 body.dark-theme .review {
     background: var(--card-bg);
-    border: 1px solid rgba(255,255,255,0.1);
+
     color: var(--text-color);
 }
 
@@ -262,10 +262,12 @@ body.dark-theme .page-header p {
 
 .options1-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, 200px);
     gap: 20px;
+    margin: 0 auto;
     max-width: 1000px;
-    width: 40%;  
+    width: 100%;
+    justify-content: center;
 }
 
 .option-btn {
@@ -348,6 +350,7 @@ body.dark-theme .option-btn small {
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
     position: sticky;
     top: 100px;
 }
@@ -364,6 +367,7 @@ body.dark-theme .timer-column {
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    box-sizing: border-box; 
 }
 
 body.dark-theme .game-column {
@@ -378,6 +382,7 @@ body.dark-theme .game-column {
     border-radius: 20px;
     border: 1px solid rgba(0,0,0,0.1);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-sizing: border-box;
     position: sticky;
     top: 100px;
 }
