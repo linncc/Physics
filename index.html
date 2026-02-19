@@ -1423,6 +1423,13 @@ body.dark-theme .question-image img {
         align-items: flex-start;
         gap: 10px;
     }
+    /* 新增：让“关于”项保持垂直排列 */
+    .setting-item.about-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        height: auto !important;
+    }
     .setting-control {
         width: 100%;
         justify-content: space-between;
@@ -1900,7 +1907,7 @@ body.dark-theme .question-image img {
             </div>
             <div class="setting-group">
                 <h3>📱 关于</h3>
-                <div class="setting-item" style="flex-direction: column; align-items: flex-start; height: auto;">
+                <div class="setting-item about-item" style="flex-direction: column; align-items: flex-start; height: auto;">
                     <p style="margin: 5px 0;">版本 1.0.0</p>
                     <div style="display: flex; justify-content: center; width: 100%; margin: 10px 0;">
                         <canvas id="wechatQrCode" width="200" height="200" style="width: 200px; height: 200px; background: white; border-radius: 8px; padding: 5px;"></canvas>
