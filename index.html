@@ -51,7 +51,7 @@ body.dark-theme {
 /* ===== 顶部导航 ===== */
 .top-nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 15px 30px;
     background: transparent;
@@ -61,12 +61,7 @@ body.dark-theme {
 }
 
 .path-display {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 16px;
-    color: var(--primary-color);
-    flex-wrap: wrap;
+    display: none;
 }
 
 .path-segment {
@@ -502,6 +497,7 @@ body.dark-theme .stats {
 }
 
 /* ===== 题目与选项 ===== */
+
 #question {
     font-size: var(--question-font-size);
     margin-bottom: 20px;
@@ -514,6 +510,21 @@ body.dark-theme .stats {
     justify-content: center;
     font-weight: normal;
     text-align: left;
+}
+
+.word-formula {
+    font-family: 'Cambria Math', 'Times New Roman', serif;
+}
+
+.option-label {
+    flex: 0 0 auto;
+    margin-right: 2px;
+}
+
+.option-content {
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
 }
 
 .option {
@@ -531,6 +542,24 @@ body.dark-theme .stats {
     justify-content: flex-start;
     line-height: 1.4;
     -webkit-tap-highlight-color: transparent;
+}
+
+.option .inline-image {
+    width: 120px; 
+    height: auto;
+    max-height: 120px;
+    object-fit: contain; 
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.review-option .inline-image {
+    width: 120px;
+    height: auto;
+    max-height: 120px;
+    object-fit: contain;
+    vertical-align: middle;
+    margin-right: 8px;
 }
 
 body.dark-theme .option {
@@ -555,12 +584,18 @@ body.dark-theme .option {
     color: #ff9900;
     font-size: 18px;
 }
-
-.option[style*="--option-height: 35px"],
-.option[style*="--option-height: 40px"] {
-    padding: 5px 10px;
+/* ===== 分数渲染 ===== */
+.frac {
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
 }
-
+.frac > span {
+    display: block;
+}
+.frac > span:first-child {
+    border-bottom: 1px solid currentColor;
+}
 /* ===== 徽章列 ===== */
 .badges-column h3 {
     text-align: center;
@@ -1237,11 +1272,6 @@ body.dark-theme .review-option.wrong .option-letter {
     color: white;
 }
 
-.review-option[style*="--option-height: 35px"],
-.review-option[style*="--option-height: 40px"] {
-    padding: 5px 10px;
-}
-
 .review-answer-info {
     display: none;
 }
@@ -1510,7 +1540,6 @@ body.dark-theme .question-image img {
     }
 }
 </style>
-
 </head>
 
 <body class="light-theme">
@@ -1549,8 +1578,8 @@ body.dark-theme .question-image img {
         <div class="top-nav">
             <div class="path-display" id="volumePathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="volumeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
             </div>
         </div>
@@ -1570,8 +1599,8 @@ body.dark-theme .question-image img {
         <div class="top-nav">
             <div class="path-display" id="modePathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="modeHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
             </div>
         </div>
@@ -1581,13 +1610,13 @@ body.dark-theme .question-image img {
         </div>
         <div class="selection-level">
             <div class="options1-grid">
-                <div class="option-btn" onclick="selectMode('板块练习')">
-                    📚 板块练习<br>
-                    <small>选择声学、光学等特定板块进行专项练习</small>
+                <div class="option-btn" onclick="selectMode('真题练习')">
+                    📝 真题练习<br>
+                    <small>选择历年中考真题进行练习</small>
                 </div>
                 <div class="option-btn" onclick="selectMode('随机练习')">
                     🔀 随机练习<br>
-                    <small>从所有中考题目中随机抽取进行综合练习</small>
+                    <small>从所有题目中随机抽取进行综合练习</small>
                 </div>
             </div>
         </div>
@@ -1595,10 +1624,10 @@ body.dark-theme .question-image img {
     
     <div id="chapterPage" class="chapter-page hidden">
         <div class="top-nav">
-            <div class="path-display" id="chapterPathDisplay"></div>
+            <div class="path-display" id="chapterPagePathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="chapterHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
             </div>
         </div>
@@ -1615,8 +1644,8 @@ body.dark-theme .question-image img {
         <div class="top-nav">
             <div class="path-display" id="sectionPathDisplay"></div>
             <div class="nav-buttons">
-                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button id="sectionHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
+                <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
                 <button class="nav-btn back-btn" onclick="goBack()">⬅️ 返回</button>
             </div>
         </div>
@@ -1687,7 +1716,6 @@ body.dark-theme .question-image img {
             <div class="path-display" id="finishPathDisplay"></div>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="showSettings()">⚙️ 设置</button>
-                <button id="finishHomeNavBtn" class="nav-btn" onclick="showHome()">🏠 首页</button>
             </div>
         </div>
         <div class="finish">
@@ -1749,7 +1777,7 @@ body.dark-theme .question-image img {
   
     <div id="settingsPage" class="hidden">
         <div class="top-nav">
-            <div class="path-display" id="chapterPathDisplay"></div>
+            <div class="path-display" id="settingsPagePathDisplay"></div>
             <div class="nav-buttons">
                 <button class="nav-btn" onclick="saveSettings()">💾 保存</button>
                 <button class="nav-btn" onclick="goBackFromSettings()">❌ 取消</button>
@@ -1839,7 +1867,7 @@ body.dark-theme .question-image img {
                     <div class="setting-label">选项文字大小</div>
                     <div class="setting-control">
                         <input type="range" id="optionFontSizeSlider" class="slider-range" min="14" max="24" value="18">
-                        <span id="optionFontSizeValue">16px</span>
+                        <span id="optionFontSizeValue">18px</span>
                     </div>
                 </div>
                 <div class="setting-item">
@@ -1870,6 +1898,17 @@ body.dark-theme .question-image img {
                     </div>
                 </div>
             </div>
+            <div class="setting-group">
+                <h3>📱 关于</h3>
+                <div class="setting-item" style="flex-direction: column; align-items: flex-start; height: auto;">
+                    <p style="margin: 5px 0;">版本 1.0.0</p>
+                    <div style="display: flex; justify-content: center; width: 100%; margin: 10px 0;">
+                        <canvas id="wechatQrCode" width="200" height="200" style="width: 200px; height: 200px; background: white; border-radius: 8px; padding: 5px;"></canvas>
+                    </div>
+                    <p style="margin: 5px 0; text-align: center; width: 100%;">开发：刘老师</p>
+                    <p style="margin: 5px 0; text-align: center; width: 100%;">  反馈问题或建议，请扫码添加微信：<a href="https://www.baidu.com">PhysicsPro</a></p>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -1890,8 +1929,19 @@ body.dark-theme .question-image img {
         </div>
     </div>
 
+<script>
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+};
+</script>
 <script src="app.min.js"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
 </body>
 
 </html>
