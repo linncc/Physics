@@ -1418,18 +1418,6 @@ body.dark-theme .question-image img {
         flex-direction: column;
         gap: 15px;
     }
-    .setting-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 10px;
-    }
-    /* 新增：让“关于”项保持垂直排列 */
-    .setting-item.about-item {
-        flex-direction: column !important;
-        align-items: flex-start !important;
-        justify-content: flex-start !important;
-        height: auto !important;
-    }
     .setting-control {
         width: 100%;
         justify-content: space-between;
@@ -1475,6 +1463,13 @@ body.dark-theme .question-image img {
         align-items: center !important;
         justify-content: space-between !important;
         gap: 8px;
+    }
+    /* 新增：让“关于”项保持垂直排列 */
+    .setting-item.about-item {
+        flex-direction: column !important;
+        align-items: flex-start !important;
+        justify-content: flex-start !important;
+        height: auto !important;
     }
     .setting-label {
         flex: 0 0 auto;
@@ -1913,14 +1908,12 @@ body.dark-theme .question-image img {
                         <canvas id="wechatQrCode" width="200" height="200" style="width: 200px; height: 200px; background: white; border-radius: 8px; padding: 5px;"></canvas>
                     </div>
                     <p style="margin: 5px 0; text-align: center; width: 100%;">开发：刘老师</p>
-                    <p style="margin: 5px 0; text-align: center; width: 100%;">  反馈问题或建议，请扫码添加微信：<a href="https://www.baidu.com">PhysicsPro</a></p>
+                    <p style="margin: 5px 0; text-align: center; width: 100%;">  反馈问题或建议，请扫码添加微信：<a href="https://linncc.pages.dev/">PhysicsPro</a></p>
                 </div>
             </div>
         </div>
     </div>
     
-
-
     <div id="customConfirmModal" class="custom-modal hidden">
         <div class="custom-modal-content">
             <div class="custom-modal-header">
@@ -1948,7 +1941,7 @@ window.MathJax = {
 };
 </script>
 <script src="app.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator/qrcode.min.js"></script>
+<script src="data/qrcode.min.js"></script>
 </body>
 
 </html>
